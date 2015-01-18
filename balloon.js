@@ -16,5 +16,4 @@ window.addEventListener("devicemotion", function(evt){
   if(angle.z < 0){
     angle.z += 360;
   }
-  document.getElementById("balloon").innerHTML = "角度ｘ:"+angle.x+"<br>角度y:"+angle.y+"<br>角度z:"+angle.z;
-}, true);
+  document.getElementById("balloon").style.webkitTransform = 'rotate('+angle.z+'deg)'; 
