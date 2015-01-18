@@ -1,28 +1,20 @@
 window.addEventListener("devicemotion", function(evt){
 
-    //加速度 x,y,z
-    var acc = evt.acceleration;
-    //傾き x,y,z
-    var gravity = evt.accelerationIncludingGravity;
-
-    //回転角 alpha:z, beta:x, gamma:y 
-    var a = evt.rotationRate.alpha;
-    var b = evt.rotationRate.beta;
-    var g = evt.rotationRate.gamma;
-
-    var txt  = "x:"+acc.x+"<br>";
-        txt += "y:"+acc.y+"<br>";
-        txt += "z:"+acc.z+"<br>";
-
-        txt += "傾きx:"+gravity.x+"<br>";
-        txt += "傾きy:"+gravity.y+"<br>";
-        txt += "傾きz:"+gravity.z+"<br>";
-
-        txt += "alpha(z):"+a+"<br>";
-        txt += "beta(x):"+b+"<br>";
-        txt += "gamma(y):"+g+"<br>";
-
-    console.log(txt);
-    document.getElementById('balloon').innerHTML = txt;
-  //document.getElementById("balloon").style;
+  var xg = evt.accelerationIncludingGravity.x; // 横方向の傾斜
+  var yg = evt.accelerationIncludingGravity.y; // 縦方向の傾斜
+  var zg = evt.accelerationIncludingGravity.z; // 上下方向の傾斜
+  var angle={};
+  angle.y = Math.floor(Math.atan2(yg,zg)/Math.PI * 180);
+  angle.x = Math.floor(Math.atan2(xg,zg)/Math.PI * 180);
+  angle.z = Math.floor(Math.atan2(yg,xg)/Math.PI * 180);
+  if(angle.x < 0){
+    angle.x += 360;
+  }
+  if(angle.y < 0){
+    angle.y += 360;
+  }
+  if(angle.z < 0){
+    angle.z += 360;
+  }
+  document.getElementById("balloon").innerHTML = "角度ｘ:"+angle.x+"<br>角度y:"+angle.y+"<br>角度z:"+angle.z;
 }, true);
