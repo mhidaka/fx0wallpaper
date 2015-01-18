@@ -21,4 +21,5 @@ window.addEventListener("devicemotion", function(evt){
 
   var z = -angle.z + 90;
   document.getElementById("balloon").style.transform = 'rotate('+z+'deg)';
+  document.getElementById("balloon").style.MozTransform = 'rotate('+z+'deg)';
 });
